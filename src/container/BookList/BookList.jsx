@@ -1,6 +1,7 @@
 import React, {useState, useEffect}  from 'react'
 import axios from "axios"
-
+import List from './List'
+import './BookList.css';
 
 
 const BookList = () => {
@@ -29,11 +30,13 @@ const BookList = () => {
             abortController.abort(); 
         };
 
-    },[])
+    },[books])
   return (
     <div className="container">
-        <div id="book-list-wrapper">
-
+        <div className="row">
+        {books.map((book) => (
+            <List key={book.id} book={book} />
+        ))}
         </div>
     </div>
   )
