@@ -1,45 +1,39 @@
-import React from 'react'
+import React, {useState, useEffect}  from 'react'
+import axios from "axios"
+
+
 
 const BookList = () => {
+    const [books, setBooksData] = useState([]);
+
+    useEffect(() => {
+        // this is to avoid memory leaks
+        const abortController = new AbortController();
+
+        async function fetchBooksBackend () {
+            try{
+              axios
+                  .get(`http://127.0.0.1:8000/api/books/`)
+                  .then((resp) => {
+                    setBooksData(resp.data)
+                  })
+            } catch (err) {
+                console.log('error', err)
+            }
+          }
+          fetchBooksBackend();
+
+
+          return () => {
+            // cancel pending fetch request on component unmount
+            abortController.abort(); 
+        };
+
+    },[])
   return (
     <div className="container">
-        <div className="book-container">
-            <div className="form-wrapper">
-                <form action="" id="form">
-                    <div class="form-group row">
-                        <label for="inputTitle" class="col-sm-2 col-form-label">Title</label>
-                        <div class="col-sm-10 mb-3">
-                            <input type="title" class="form-control" id="inputTitle" placeholder="Title" />
-                        </div>
-                    </div>
-                    <div class="form-group row">
-                        <label for="inputAuthor" class="col-sm-2 col-form-label">Author</label>
-                        <div class="col-sm-10 mb-3">
-                            <input type="author" class="form-control" id="inputAuthor" placeholder="Author"/>
-                        </div>
-                    </div>
-                    <div class="form-group row">
-                        <label for="inputIsbn" class="col-sm-2 col-form-label">ISBN</label>
-                        <div class="col-sm-10 mb-3">
-                            <input type="isbn" class="form-control" id="inputIsbn" placeholder="ISBN"/>
-                        </div>
-                    </div>
-                    <div class="form-group row">
-                        <label class="my-1 mr-2" for="inlineFormCustomSelectStatus">Status</label>
-                        <select class="custom-select my-3 mr-sm-2" id="inlineFormCustomSelectPref">
-                            <option selected>Choose...</option>
-                            <option value="Unread">Unread</option>
-                            <option value="In Progress">In Progress</option>
-                            <option value="Finished">Finished</option>
-                        </select>
-                    </div>
-                    <div class="form-group row">
-                        <div class="col-sm-10 mb-3">
-                            <button type="submit" class="btn btn-primary">Submit</button>
-                        </div>
-                    </div>
-                </form>
-            </div>
+        <div id="book-list-wrapper">
+
         </div>
     </div>
   )
