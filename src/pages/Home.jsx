@@ -5,7 +5,6 @@ import {BookForm, BookList} from "../container";
 const Home = () => {
   return (
     <div>
-      <BookForm />
       <BookList />
     </div>
   )

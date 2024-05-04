@@ -1,0 +1,44 @@
+.card-image-holder {
+    width: 85%;
+    height: 20vw;
+    align-self: center;
+    border: 2px solid #bc9982;
+}
+
+@media screen and (max-width: 768px) {
+.card-image-holder {
+    width: 90%;
+    height: 300px;
+  }
+}
+
+.card-body p {
+    color: #675f5a;
+    /* text-align: center; */
+}
+
+.card-body h5 {
+    color: #001003;
+    /* text-align: center; */
+}
+
+.card {
+    /* background-color: #111111; */
+}
+
+hr {
+    border: 0;
+    width: 75px;
+    height: 2px;
+    background-color: #bf5d1d;
+    margin-top: 0;
+}
+
+#btn-card {
+    color: #B7B4B2;
+    border-color: #bc9982;
+}
+
+.opacity {
+    background-color: rgba(0,0,0,0.25);
+}
