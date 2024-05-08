@@ -1,9 +1,8 @@
 import List from './List/List';
-import EditList from './List/EditList';
 import AddForm from './Forms/AddForm';
-
+import EditForm from './Forms/EditForm';
 export {
     List,
-    EditList,
-    AddForm
+    AddForm,
+    EditForm
 };

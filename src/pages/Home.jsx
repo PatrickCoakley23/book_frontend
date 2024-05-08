@@ -1,12 +1,10 @@
 import React from 'react'
 
-import {BookForm, BookList} from "../container";
+import { Books } from '../container'
 
 const Home = () => {
   return (
-    <div>
-      <BookList />
-    </div>
+    <Books />
   )
 }
 

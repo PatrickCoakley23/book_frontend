@@ -1,5 +1,9 @@
-import BookList from "./BookList/BookList"
+import Books from "./Books/Books";
+import EditBook from "./Books/EditBook";
+import Loading from "../components/Loading";
 
 export {
-    BookList
+    Books,
+    EditBook,
+    Loading
 }

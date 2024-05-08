@@ -1,8 +1,8 @@
 import React from 'react'
+import { Link } from 'react-router-dom'
 
 const List = (props) => {
     const {id, title, author, isbn, status} = props.book 
-    const handleEditClick = props.handleEditClick
 
   return (
     <React.Fragment>
@@ -13,7 +13,7 @@ const List = (props) => {
                     <p className="card-text">{author}</p>
                     <p className="card-text">ISBN: {isbn}</p>
                     <p className="card-text mb-auto">Status: {status}</p>
-                    <button className='btn btn-sm btn-outline-info edit-btn mb-2' onClick={(e) => handleEditClick(e, props.book)} >Edit</button>
+                    <Link to={`/edit_book/${id}`}><button className='btn btn-sm btn-outline-info edit-btn mb-2'>Edit</button></Link>
                     <button className='btn btn-sm btn-outline-dark delete-btn mb-2'>Delete</button>
                 </div>
             </div>
