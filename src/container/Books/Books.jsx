@@ -1,13 +1,14 @@
 import React, {useState, useEffect, useContext}  from 'react'
 import axios from "axios"
 import { BookContext } from '../../context/BookContext';
-
+import { useNavigate } from 'react-router-dom';
 import {AddForm, List} from '../../components';
 
 
 const Books = () => {
   const [books, setBooksData] = useState([]);
   const [formData, setFormData, validateForm, handleChange, errors, setErrors, axiosConfig] = useContext(BookContext)
+  const navigate = useNavigate();
 
   const handleSubmit = (e) => {
     //Prevent default refreshing
@@ -27,6 +28,20 @@ const Books = () => {
               status: "Status"}
             )
         });
+    }
+  }
+
+  console.log(books)
+
+  const handleDelete = (id) => {
+    const confirm = window.confirm("Are you sure you want to delete this book from the list?")
+    if(confirm) {
+      const booksList = books.filter(book => book.id !== id);
+      axios.delete(`http://127.0.0.1:8000/api/book_delete/${id}/`)
+      .then(setBooksData(booksList))
+      .then((resp) => {
+        navigate('/')
+      }).catch(err => console.log(err));
     }
   }
 
@@ -58,7 +73,7 @@ const Books = () => {
 
       <div className="row">
       {books.map((book) => (
-        <List key={book.id} book={book}/>
+        <List key={book.id} book={book} handleDelete={handleDelete}/>
       ))}
       </div>
     </div>

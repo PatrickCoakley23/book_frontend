@@ -4,8 +4,10 @@ import axios from "axios"
 import {Form, Button} from 'react-bootstrap'
 import { BookContext } from '../../context/BookContext';
 
-const EditForm = ({id, handleUpdate,errors}) => {
-    const [formData, handleChange] = useContext(BookContext)
+const EditForm = ({handleUpdate}) => {
+    // const [formData, handleChange] = useContext(BookContext)
+
+    const [formData, setFormData, validateForm, handleChange, errors] = useContext(BookContext)
     
   return (
     <React.Fragment>

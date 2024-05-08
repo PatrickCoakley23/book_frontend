@@ -1,5 +1,5 @@
 import React, {useState, useEffect, useContext}  from 'react'
-import {useParams, useNavigate } from 'react-router-dom'
+import {useParams, useNavigate, Link } from 'react-router-dom'
 import axios from "axios"
 import { BookContext } from '../../context/BookContext';
 
@@ -40,19 +40,33 @@ const EditBook = () => {
         console.log('error', err));
   },[])
 
+
   return (
+
     <div className="container">
       <div className="form-wrapper py-4 px-4">
+      {formData.title && 
         <div className="row">
             <div className="col-md-10 offset-md-1">
+              
               <EditForm 
               handleUpdate={handleUpdate}
               errors={errors}
               id={id}
               formData={formData}
+              setFormData={setFormData}
               />
             </div>
         </div>
+      }
+      {!formData.title && 
+        <div>
+          <h2>Post Not Found</h2>
+          <p>
+          <Link to='/'>Visit Our Homepage</Link>
+          </p>
+        </div>
+      }
       </div>
     </div>
   ) 
