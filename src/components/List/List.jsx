@@ -1,7 +1,5 @@
 import React from 'react'
-import axios from 'axios'
 import { Link,} from 'react-router-dom'
-import { useNavigate } from 'react-router-dom'
 
 const List = (props) => {
     const {id, title, author, isbn, status} = props.book 
@@ -21,7 +19,6 @@ const List = (props) => {
                 </div>
             </div>
         </div>
-
     </React.Fragment>
   )
 }

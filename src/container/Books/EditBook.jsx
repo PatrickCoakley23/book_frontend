@@ -1,7 +1,7 @@
 import React, {useState, useEffect, useContext}  from 'react'
 import {useParams, useNavigate, Link } from 'react-router-dom'
-import axios from "axios"
 import { BookContext } from '../../context/BookContext';
+import api from '../../api/books'
 
 import {EditForm,} from '../../components';
 
@@ -18,7 +18,7 @@ const EditBook = () => {
       if(Object.keys(formErrors).length > 0){
           setErrors(formErrors)
       }else{
-          axios.post(`http://127.0.0.1:8000/api/book_update/${id}/`, formData, axiosConfig)
+          api.post(`/api/book_update/${id}/`, formData, axiosConfig)
           .then((resp) => {
               setFormData({title: "",
               author: "",
@@ -33,7 +33,7 @@ const EditBook = () => {
   }
   
   useEffect(() => {
-    axios.get(`http://127.0.0.1:8000/api/book_selected/${id}/`)
+    api.get(`/api/book_selected/${id}/`)
         .then((resp) => {
         setFormData(resp.data)
         }).catch(err => 

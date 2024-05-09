@@ -1,10 +1,8 @@
 import React, {useState, useEffect, useContext}  from 'react'
-import axios from "axios"
 import { BookContext } from '../../context/BookContext';
 import { useNavigate } from 'react-router-dom';
 import {AddForm, List} from '../../components';
-
-
+import api from '../../api/books'
 const Books = () => {
   const [books, setBooksData] = useState([]);
   const [formData, setFormData, validateForm, handleChange, errors, setErrors, axiosConfig] = useContext(BookContext)
@@ -19,7 +17,7 @@ const Books = () => {
     if(Object.keys(formErrors).length > 0){
         setErrors(formErrors)
     }else{
-        axios.post("http://127.0.0.1:8000/api/book_add/", formData, axiosConfig)
+        api.post("/api/book_add/", formData, axiosConfig)
         .then((resp) => {
             setBooksData([...books, resp.data ])
             setFormData({title: "",
@@ -30,14 +28,12 @@ const Books = () => {
         });
     }
   }
-
-  console.log(books)
-
+  
   const handleDelete = (id) => {
     const confirm = window.confirm("Are you sure you want to delete this book from the list?")
     if(confirm) {
       const booksList = books.filter(book => book.id !== id);
-      axios.delete(`http://127.0.0.1:8000/api/book_delete/${id}/`)
+      api.delete(`/api/book_delete/${id}/`)
       .then(setBooksData(booksList))
       .then((resp) => {
         navigate('/')
@@ -48,8 +44,7 @@ const Books = () => {
   useEffect(() => {
     async function fetchBooksBackend () {
         try{
-            axios
-            .get(`http://127.0.0.1:8000/api/books/`)
+            api.get(`/api/books/`)
             .then((resp) => {
                 setBooksData(resp.data)
             })
@@ -72,9 +67,15 @@ const Books = () => {
       </div>
 
       <div className="row">
-      {books.map((book) => (
-        <List key={book.id} book={book} handleDelete={handleDelete}/>
-      ))}
+        {books.length ? (
+          books.map((book) => (
+            <List key={book.id} book={book} handleDelete={handleDelete}/>
+          ))
+        ): (
+          <p style={{ marginTop: "2rem" }}>
+            No Books to display.
+          </p>
+        )}
       </div>
     </div>
   )
