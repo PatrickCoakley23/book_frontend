@@ -9,7 +9,7 @@ const AddForm = ({handleSubmit}) => {
   return (
     <React.Fragment>
         <Form  id="form" onSubmit={handleSubmit}>
-            <h2 className='text-center mb-4 text-white'>Add To Book List</h2>
+            <h2 className='text-center mb-4 text-white'>Add To Booklist</h2>
             <Form.Group className="mb-3" controlId="formBasicTitle">
                 <Form.Control type="title" name="title" value={formData.title} onChange={handleChange} placeholder="Title" />
             </Form.Group>
