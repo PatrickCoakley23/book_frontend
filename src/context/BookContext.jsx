@@ -21,11 +21,16 @@ const BookContextProvider = (props) => {
     };
 
     const validateForm = () => {
-        const {isbn,} = formData
+        const {title, author, isbn, status} = formData
         const newErrors = {}
-    
-        if(!isbn) newErrors.isbn = 'Please enter isbn'
-    
+        
+        if(!title || title === '') newErrors.title = 'Please enter a Title'
+        if(!author || title === '') newErrors.author = 'Please enter an Author'
+        if(!isbn || title === '') 
+            newErrors.isbn = 'Please enter ISBN'
+        else if(isbn.length < 10)
+            newErrors.isbn = 'Not enough characters for a valid ISBN'
+        if(!status || status === "Status") newErrors.status = 'Please enter valid Status'
         return newErrors
     }
 
